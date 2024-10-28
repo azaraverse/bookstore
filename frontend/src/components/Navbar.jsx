@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GiWhiteBook } from "react-icons/gi";
 import { RiSearch2Line } from "react-icons/ri";
@@ -7,8 +7,24 @@ import { GoHeart } from "react-icons/go";
 import { FaOpencart } from "react-icons/fa";
 import avatarIcon from "../assets/avatar.png";
 
+const navigation = [
+  {
+    name: "Dashboard", href: "/dashboard"
+  },
+  {
+    name: "Orders", href: "/orders"
+  },
+  {
+    name: "Cart", href: "/cart"
+  },
+  {
+    name: "Checkout", href: "/checkout"
+  },
+]
+
 const Navbar = () => {
-  let currentUser = true;
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+  const currentUser = true;
 
   return (
     <header className='max-w-screen-2xl mx-auto px-4 py-6'>
@@ -31,15 +47,33 @@ const Navbar = () => {
         <div className='relative flex items-center md:space-x-3 space-x-2'>
           <div>
             {
-              currentUser ? (
-              <button>
+              currentUser ? <>
+              <button onClick={() => setIsDropDownOpen(!isDropDownOpen)}>
                 <img
                   src={avatarIcon}
                   alt="User Avatar"
-                  className='w-7 h-7 rounded-full ring-2 ring-blue-500 ring-offset-2 ring-offset-white'
+                  className='size-7 rounded-full ring-2 ring-blue-500'
                 />
               </button>
-              ) : (
+              {/** display dropdown */}
+              {
+                isDropDownOpen && (
+                  <div className='absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md z-40'>
+                    <ul className='py-2'>
+                      {
+                        navigation.map((item) => (
+                          <li key={item.name} onClick={() => setIsDropDownOpen(false)}>
+                            <Link to={item.href} className='block px-4 py-2 text-sm hover:bg-gray-100'>
+                              {item.name}
+                            </Link>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                )
+              }
+              </> : (
               <Link to='/login'>
                 <PiUserFill className='size-6'/>
               </Link>
@@ -50,9 +84,9 @@ const Navbar = () => {
             <GoHeart className='size-6' />
           </button>
 
-          <Link to='/cart' className='bg-primary p-1 sm:px-6 px-2 flex items-center rounded-md'>
+          <Link to='/cart' className='bg-primary p-1 sm:px-6 px-2 flex items-center rounded-md space-x-2'>
             <FaOpencart className='' />
-            <span className='text-sm font-semibold sm:ml-1'>0</span>
+            <span className='text-sm font-semibold'>0</span>
           </Link>
         </div>
       </nav>
