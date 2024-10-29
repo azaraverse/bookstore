@@ -4,7 +4,7 @@ import { GiWhiteBook } from "react-icons/gi";
 import { RiSearch2Line } from "react-icons/ri";
 import { PiUserFill } from "react-icons/pi";
 import { GoHeart } from "react-icons/go";
-import { FaOpencart } from "react-icons/fa";
+import { HiMiniShoppingBag } from "react-icons/hi2";
 import avatarIcon from "../assets/avatar.png";
 
 const navigation = [
@@ -85,7 +85,7 @@ const Navbar = () => {
           </button>
 
           <Link to='/cart' className='bg-primary p-1 sm:px-6 px-2 flex items-center rounded-md space-x-2'>
-            <FaOpencart className='' />
+            <HiMiniShoppingBag className='' />
             <span className='text-sm font-semibold'>0</span>
           </Link>
         </div>
