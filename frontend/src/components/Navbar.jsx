@@ -6,6 +6,7 @@ import { PiUserFill } from "react-icons/pi";
 import { GoHeart } from "react-icons/go";
 import { HiMiniShoppingBag } from "react-icons/hi2";
 import avatarIcon from "../assets/avatar.png";
+import { useSelector } from 'react-redux';
 
 const navigation = [
   {
@@ -25,6 +26,7 @@ const navigation = [
 const Navbar = () => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const currentUser = true;
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   return (
     <header className='max-w-screen-2xl mx-auto px-4 py-6'>
@@ -84,9 +86,11 @@ const Navbar = () => {
             <GoHeart className='size-6' />
           </button>
 
-          <Link to='/cart' className='bg-primary p-1 sm:px-6 px-2 flex items-center rounded-md space-x-2'>
+          <Link to='/cart' className='bg-primary p-1 sm:px-6 px-2 flex items-center rounded-md space-x-2 font-primary'>
             <HiMiniShoppingBag className='' />
-            <span className='text-sm font-semibold'>0</span>
+            {
+              cartItems.length > 0 ? <span className='text-sm font-semibold'>{ cartItems.length }</span> : <span className='text-sm font-semibold'>0</span>
+            }
           </Link>
         </div>
       </nav>
