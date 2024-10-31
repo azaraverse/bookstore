@@ -8,8 +8,8 @@ const CartPage = () => {
   const cartItems = useSelector(state => state.cart.cartItems);
   const totalPrice = cartItems.reduce((acc, item) => acc + item.newPrice, 0).toFixed(2);
   const dispatch = useDispatch();
-  const handleRemoveFromCart = (product) => {
-    dispatch(removeFromCart(product));
+  const handleRemoveFromCart = (book) => {
+    dispatch(removeFromCart(book));
   };
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -19,7 +19,7 @@ const CartPage = () => {
     <div className="flex mt-12 h-full flex-col overflow-hidden bg-white shadow-xl font-primary">
       <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
         <div className="flex items-start justify-between">
-          <div className="text-lg font-medium text-gray-900">
+          <div className="text-lg font-semibold text-gray-900">
             Shopping Cart
           </div>
           <div className="ml-3 flex h-7 items-center ">
@@ -57,7 +57,7 @@ const CartPage = () => {
                               </h3>
                               <p className="sm:ml-4">Gh₵ { book.newPrice }</p>
                             </div>
-                            <p className="mt-1 text-sm text-gray-500 capitalize"><strong>Category:</strong> {book.category}</p>
+                            <p className="mt-1 text-sm text-gray-500 capitalize"><strong>Category:</strong> { book.category }</p>
                           </div>
                           <div className="flex flex-1 flex-wrap items-end justify-between space-y-2 text-sm">
                             <p className="text-gray-500"><strong>Qty:</strong> 1</p>
@@ -77,7 +77,7 @@ const CartPage = () => {
                 </ul>
               ) : (
                 <p>
-                  No products added to cart
+                  No book added to cart!
                 </p>
               )
             }
